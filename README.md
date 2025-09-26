@@ -5,7 +5,7 @@ This project provides a network interface that allows clients to share their con
 ## Features
 
 - **Remote Gamepad Control**: Connect your gamepad/steering wheel to one machine and use it to control games on another
-- **Logitech G920 Support**: Optimized for Logitech G920 steering wheel with pedals and gear shifter  
+- **Logitech G920 Support**: Optimized for Logitech G920 steering wheel with pedals and gear shifter
 - **Force Feedback**: Bi-directional communication for force feedback effects
 - **Real-time Communication**: Low-latency WebSocket communication for responsive gaming
 - **Virtual Device Emulation**: Creates virtual input devices that games can recognize natively
@@ -16,7 +16,7 @@ This project provides a network interface that allows clients to share their con
 The primary use case is connecting a Logitech G920 steering wheel to a Raspberry Pi (client) and using it to control racing games like SuperTuxKart running on a more powerful host machine (server).
 
 ```
-[Raspberry Pi] <-- USB --> [Logitech G920] 
+[Raspberry Pi] <-- USB --> [Logitech G920]
      |
      | (Network)
      v
@@ -76,6 +76,12 @@ sudo udevadm control --reload-rules
 sudo udevadm trigger
 ```
 
+Create a udev rule to allow group input to write to `/dev/uinput`
+
+```toml
+KERNEL=="uinput", MODE="0660", GROUP="input"
+```
+
 3. **Start the server**:
 ```bash
 ./start_server.sh
@@ -115,7 +121,7 @@ uv run ngi-client --host YOUR_SERVER_IP --port 9999
 ```bash
 uv run ngi-server [options]
   --host HOST          Server bind address (default: 0.0.0.0)
-  --port PORT          Server port (default: 9999) 
+  --port PORT          Server port (default: 9999)
   --log-level LEVEL    Logging level (DEBUG, INFO, WARNING, ERROR)
 ```
 
@@ -124,7 +130,7 @@ uv run ngi-server [options]
 uv run ngi-client [options]
   --host HOST          Server host address (default: localhost)
   --port PORT          Server port (default: 9999)
-  --log-level LEVEL    Logging level (DEBUG, INFO, WARNING, ERROR) 
+  --log-level LEVEL    Logging level (DEBUG, INFO, WARNING, ERROR)
   --rate HZ            Update rate in Hz (default: 60)
 ```
 
@@ -231,7 +237,7 @@ Enable debug logging to troubleshoot issues:
 # Server debug mode
 uv run ngi-server --log-level DEBUG
 
-# Client debug mode  
+# Client debug mode
 uv run ngi-client --log-level DEBUG
 ```
 

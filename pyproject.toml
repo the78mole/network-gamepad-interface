@@ -31,6 +31,10 @@ dependencies = [
     "evdev>=1.6.0",
 ]
 
+[tool.flake8]
+max-line-length = 88
+max-complexity = 12
+
 [project.scripts]
 ngi-server = "ngi.server.main:main"
 ngi-client = "ngi.client.main:main"

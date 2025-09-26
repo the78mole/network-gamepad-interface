@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Start Network Gamepad Interface Server
 # Run this on the host machine where the game is running

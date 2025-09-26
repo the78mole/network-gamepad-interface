@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Start Network Gamepad Interface Client  
+# Start Network Gamepad Interface Client
 # Run this on the Raspberry Pi with connected Logitech G920
 
 echo "Starting Network Gamepad Interface Client..."
