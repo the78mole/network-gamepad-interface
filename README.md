@@ -28,6 +28,7 @@ The primary use case is connecting a Logitech G920 steering wheel to a Raspberry
 ### Prerequisites
 
 - Python 3.8 or higher
+- [uv](https://docs.astral.sh/uv/) package manager
 - Linux system with uinput support (for server)
 - Logitech G920 or compatible gamepad (for client)
 
@@ -39,14 +40,22 @@ git clone https://github.com/the78mole/network-gamepad-interface.git
 cd network-gamepad-interface
 ```
 
-2. Install dependencies:
+2. Install uv if you haven't already:
 ```bash
-pip install -r requirements.txt
+# Install uv using the official installer
+curl -LsSf https://astral.sh/uv/install.sh | sh
+# Or using pip
+pip install uv
 ```
 
-3. For development installation:
+3. Install dependencies using uv:
 ```bash
-pip install -e .
+uv sync
+```
+
+4. For development installation:
+```bash
+uv sync --dev
 ```
 
 ### Server Setup (Gaming PC)
@@ -71,7 +80,7 @@ sudo udevadm trigger
 ```bash
 ./start_server.sh
 # Or manually:
-python -m ngi.server.main --host 0.0.0.0 --port 9999
+uv run ngi-server --host 0.0.0.0 --port 9999
 ```
 
 The server will create a virtual gamepad device that games can detect and use.
@@ -86,7 +95,7 @@ The client reads from your physical gamepad and sends the data to the server.
 ```bash
 ./start_client.sh --host YOUR_SERVER_IP
 # Or manually:
-python -m ngi.client.main --host YOUR_SERVER_IP --port 9999
+uv run ngi-client --host YOUR_SERVER_IP --port 9999
 ```
 
 ### Testing with SuperTuxKart
@@ -104,7 +113,7 @@ python -m ngi.client.main --host YOUR_SERVER_IP --port 9999
 
 **Server:**
 ```bash
-python -m ngi.server.main [options]
+uv run ngi-server [options]
   --host HOST          Server bind address (default: 0.0.0.0)
   --port PORT          Server port (default: 9999) 
   --log-level LEVEL    Logging level (DEBUG, INFO, WARNING, ERROR)
@@ -112,7 +121,7 @@ python -m ngi.server.main [options]
 
 **Client:**
 ```bash
-python -m ngi.client.main [options]
+uv run ngi-client [options]
   --host HOST          Server host address (default: localhost)
   --port PORT          Server port (default: 9999)
   --log-level LEVEL    Logging level (DEBUG, INFO, WARNING, ERROR) 
@@ -220,10 +229,10 @@ Enable debug logging to troubleshoot issues:
 
 ```bash
 # Server debug mode
-python -m ngi.server.main --log-level DEBUG
+uv run ngi-server --log-level DEBUG
 
 # Client debug mode  
-python -m ngi.client.main --log-level DEBUG
+uv run ngi-client --log-level DEBUG
 ```
 
 Debug logs are also written to `/tmp/gamepad_server.log` and `/tmp/gamepad_client.log`.

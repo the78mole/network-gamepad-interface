@@ -11,11 +11,11 @@ if [ "$EUID" -ne 0 ]; then
     echo "If you get permission errors, try running with: sudo $0"
 fi
 
-# Check if virtual environment exists
-if [ -d "venv" ]; then
-    echo "Activating virtual environment..."
-    source venv/bin/activate
+# Install dependencies if needed
+if [ ! -f "uv.lock" ]; then
+    echo "Installing dependencies with uv..."
+    uv sync
 fi
 
-# Start the server
-python -m ngi.server.main "$@"
+# Start the server using uv
+uv run ngi-server "$@"

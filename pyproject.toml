@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "network-gamepad-interface"
+version = "0.1.0"
+description = "Network interface for remote gamepad/joystick/steering wheel control"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Daniel Glaser" },
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "pygame>=2.5.0",
+    "python-uinput>=0.11.2",
+    "websockets>=11.0",
+    "evdev>=1.6.0",
+]
+
+[project.scripts]
+ngi-server = "ngi.server.main:main"
+ngi-client = "ngi.client.main:main"
+
+[project.urls]
+Homepage = "https://github.com/the78mole/network-gamepad-interface"
+Repository = "https://github.com/the78mole/network-gamepad-interface"
+Issues = "https://github.com/the78mole/network-gamepad-interface/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ngi"]
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0.0",
+]

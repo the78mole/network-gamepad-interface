@@ -5,11 +5,11 @@
 
 echo "Starting Network Gamepad Interface Client..."
 
-# Check if virtual environment exists
-if [ -d "venv" ]; then
-    echo "Activating virtual environment..."
-    source venv/bin/activate
+# Install dependencies if needed
+if [ ! -f "uv.lock" ]; then
+    echo "Installing dependencies with uv..."
+    uv sync
 fi
 
-# Start the client
-python -m ngi.client.main "$@"
+# Start the client using uv
+uv run ngi-client "$@"

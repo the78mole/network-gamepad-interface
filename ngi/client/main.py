@@ -124,7 +124,7 @@ def setup_logging(level: str = "INFO"):
     )
 
 
-async def main():
+async def async_main():
     """Main entry point."""
     parser = argparse.ArgumentParser(description="Network Gamepad Interface Client")
     parser.add_argument("--host", default="localhost", help="Server host address")
@@ -168,5 +168,10 @@ async def main():
         await client.cleanup()
 
 
+def main():
+    """Synchronous main entry point for console scripts."""
+    asyncio.run(async_main())
+
+
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()

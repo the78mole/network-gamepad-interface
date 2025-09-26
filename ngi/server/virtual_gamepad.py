@@ -70,7 +70,7 @@ class VirtualGamepadDevice:
     def initialize(self) -> bool:
         """Initialize the virtual gamepad device."""
         if uinput is None:
-            self.logger.error("python-uinput not available. Install with: pip install python-uinput")
+            self.logger.error("python-uinput not available. Install dependencies with: uv sync")
             return False
             
         try:
